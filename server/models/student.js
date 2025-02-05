@@ -17,6 +17,10 @@ const studentSchema = new mongoose.Schema({
   password: {
     type: String,
   },
+  student_rollno: {
+    type: String,
+    unique: true,
+  },
 
   class_room: [
     {

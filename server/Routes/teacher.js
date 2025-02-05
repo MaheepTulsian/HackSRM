@@ -95,7 +95,7 @@ router.post("/create-classroom/:id", up.none(), async (req, res) => {
     }
 
     // Create new classroom
-    const newClassroom = { class_name, pdf_url: [], student_id: [] };
+    const newClassroom = { class_name, pdf_url: [], student_rollno: [] };
 
     // Add new classroom to teacher's class_room array
     teacher.class_room.push(newClassroom);
@@ -110,5 +110,58 @@ router.post("/create-classroom/:id", up.none(), async (req, res) => {
     res.status(500).json({ message: "Server error", error });
   }
 });
+router.post("/add-rollno/:teacherId/:classroomId", async (req, res) => {
+  const { teacherId, classroomId } = req.params;
+  const { rollno } = req.body;
 
+  try {
+    // Find the teacher document that contains the classroom with the given classroomId
+    const teacher = await Teacher.findById(teacherId);
+
+    if (!teacher) {
+      return res.status(404).json({ message: "Teacher not found" });
+    }
+
+    // Find the specific classroom within the teacher's class_room array
+    const classroom = teacher.class_room.id(classroomId);
+
+    if (!classroom) {
+      return res.status(404).json({ message: "Classroom not found" });
+    }
+
+    // Add the roll number to the student_rollnos array
+    classroom.student_rollnos.push(rollno);
+
+    // Save the updated teacher document
+    await teacher.save();
+
+    // Send response
+    res
+      .status(200)
+      .json({ message: "Roll number added successfully", classroom });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error", error });
+  }
+});
+
+router.get("/get_class/:teacherId", async (req, res) => {
+  const { teacherId } = req.params;
+
+  try {
+    const teacher = await Teacher.findById(teacherId);
+
+    if (!teacher) {
+      return res.status(404).json({ message: "Teacher not found" });
+    }
+
+    const class_room = teacher.class_room;
+    return res
+      .status(200)
+      .json({ class_room, message: "Classroom retrieved successfully" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Server error", error });
+  }
+});
 export default router;
