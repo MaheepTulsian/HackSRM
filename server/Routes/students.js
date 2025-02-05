@@ -23,14 +23,20 @@ router.post("/login", up.none(), async (req, res) => {
 
 // used for the student to register
 router.post("/register", up.none(), async (req, res) => {
-  const { email, password, name, username } = req.body;
+  const { email, password, name, username, student_rollno } = req.body;
 
   const user = Student.findById({ email, password, name, username });
   if (!user) {
     throw new ApiError(404, "Student not found");
   }
 
-  const student = new Student({ email, password, name, username });
+  const student = new Student({
+    email,
+    password,
+    name,
+    username,
+    student_rollno,
+  });
 
   await student.save();
 

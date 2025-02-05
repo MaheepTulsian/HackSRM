@@ -3,7 +3,7 @@ import mongoose, { Schema } from "mongoose";
 const classRoomSchema = new Schema({
   class_name: { type: String },
   pdf_url: [{ type: String }],
-  student_id: [{ type: String }],
+  student_rollnos: [{ type: String }],
 });
 
 const teacherSchema = new Schema({
