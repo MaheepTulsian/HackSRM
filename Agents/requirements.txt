@@ -1,3 +1,7 @@
 crewai
 crewai-tools
 load_dotenv
+docx2txt
+fastapi
+uvicorn
+requests
