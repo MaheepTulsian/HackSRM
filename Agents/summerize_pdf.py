@@ -13,19 +13,9 @@ crew = Crew(
     share_crew=True             # Allows collaboration across different tasks
 )
 
-
-
-# Define the input for the summarization process
-input_data = {
-    "prompt": 
-        "Summarize the content of the notes for quick reference and review."
-        "Provide a concise overview of the key points and main ideas presented."
-        "Ensure that the summary is clear, brief, and captures the essence of both documents.",  # Use the defined prompt for summarization
-}
-
-# Start the summarization process with feedback enabled
-print("🚀 Starting the summarization process...\n")
-result = crew.kickoff(inputs=input_data)
-
-# Output the result
-print(result)
+def summerize(prompt: str):
+    print(f"Received prompt: {prompt}")  # Debugging
+    input_data = {"prompt": prompt}
+    result = crew.kickoff(inputs=input_data)
+    print(f"Generated response: {result}")  # Debugging
+    return result

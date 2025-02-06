@@ -2,7 +2,7 @@ from crewai_tools import PDFSearchTool, DOCXSearchTool, TXTSearchTool, SerperDev
 import os
 
 # Set the path to your local PDF file inside the "constant" folder
-pdf_path = os.path.join(os.getcwd(), "constant", "test_pdf.pdf")
+pdf_path = os.path.join(os.getcwd(), "constant", "array.pdf")
 solution_path = os.path.join(os.getcwd(), "constant", "solution.docx")
 assignment_path = os.path.join(os.getcwd(), "constant", "assignment.txt")
 

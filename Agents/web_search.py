@@ -13,14 +13,9 @@ crew = Crew(
     share_crew=True             # Allows collaboration across different tasks
 )
 
-# Define the input for the tutoring process
-input_data = {
-    "topic": "Array data structure"
-}
-
-# Start the tutoring process with feedback enabled
-print("🚀 Starting the tutoring process...\n")
-result = crew.kickoff(inputs=input_data)
-
-# Output the result
-print(result)
+def search(prompt: str):
+    print(f"Received prompt: {prompt}")  # Debugging
+    input_data = {"prompt": prompt}
+    result = crew.kickoff(inputs=input_data)
+    print(f"Generated response: {result}")  # Debugging
+    return result

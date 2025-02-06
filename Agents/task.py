@@ -45,6 +45,7 @@ summerizer_task = Task(
     description=(
         "Summarize the notes to highlight the key points and main ideas. "
         "Focus on providing a clear and brief overview, omitting unnecessary details, and ensuring the essence is captured."
+        "{prompt}"
     ),
     expected_output="A concise summary of the notes, covering the essential points in one or two paragraphs.",
     tools=[pdf_tool],  # Assuming pdf_tool is being used for the extraction
@@ -54,9 +55,8 @@ summerizer_task = Task(
 # Define the Tutor Task
 tutor_task = Task(
     description=(
-        "Provide tutoring support to students by answering questions, explaining concepts for {topic} "
-        "and guiding them through the learning material. Use online resources to enhance explanations "
-        "and ensure students have a clear understanding of the subject matter."
+        "Explain {prompt} in a clear and concise manner. "
+        "Provide detailed explanations. "
     ),
     expected_output="Clear explanations, answers to questions, and guidance to help students understand the material.",
     tools=[web_search_tool],

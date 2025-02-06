@@ -36,6 +36,7 @@ assignment_checker = Agent(
         "of assignments. Proficient in assessing assignments based on various criteria, providing constructive "
         "feedback, and guiding agents towards producing high-quality work."
     ),
+    tools=[pdf_tool],
     allow_delegation=True
 )
 

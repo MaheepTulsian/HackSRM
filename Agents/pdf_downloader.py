@@ -1,7 +1,7 @@
 import requests
 
 pdf_url = "https://files.catbox.moe/pplzea.pdf"
-destination_path = r"C:\Users\satyendra singh\Desktop\react files\HackSRM\Agents\constant\generate_assignment.pdf"
+destination_path = r"\constant\generate_assignment.pdf"
 
 headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"

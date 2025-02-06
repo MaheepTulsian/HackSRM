@@ -1,35 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from './components/ThemeProvider';
+import LandingPage from './pages/LandingPage';
+import Signup from './pages/Signup';
+import Login from './pages/Login';
+import ForgotPassword from './pages/ForgotPassword';
+import TeacherDashboard from './pages/TeacherDashboard';
+import StudentDashboard from './pages/StudentDashboard';
+import ClassDashboard from './pages/ClassDashboard';
+import ShareMaterial from './pages/ShareMaterial';
+import ShareAssignment from './pages/ShareAssignment';
+import Rag from './pages/Rag';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <Router>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/forgotpassword" element={<ForgotPassword />} />
+          <Route path="/teacherdashboard" element={<TeacherDashboard />} />
+          <Route path="/teacherdashboard/class/:id" element={<ClassDashboard />} >
+            <Route path="" element={<ShareMaterial />} />
+            <Route path="share-material" element={<ShareMaterial />} />
+            <Route path="share-assignment" element={<ShareAssignment />} />
+          </Route>
+          <Route path="/studentdashboard" element={<StudentDashboard />} >
+            <Route path="" element={<Rag />} />
+            <Route path="rag" element={<Rag />} />
+          </Route>
+        </Routes>
+      </Router>
+    </ThemeProvider>
+  );
+};
 
-export default App
+export default App;
