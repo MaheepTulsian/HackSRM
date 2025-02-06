@@ -21,7 +21,11 @@ const studentSchema = new mongoose.Schema({
     type: String,
     unique: true,
   },
-
+  submitted_assignments: [
+    {
+      type: String,
+    },
+  ],
   class_room: [
     {
       type: String, //teacher unique id
