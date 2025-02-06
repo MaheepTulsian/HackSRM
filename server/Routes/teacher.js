@@ -258,6 +258,45 @@ router.get("/get-pdf/:teacherId/:classroomId", async (req, res) => {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 });
+
+router.post(
+  "/post-pdf/:teacherId/:classroomId",
+  up.none(),
+  async (req, res) => {
+    const { teacherId, classroomId } = req.params;
+    const { pdf_url } = req.body;
+
+    try {
+      // Find the teacher document that contains the classroom with the given classroomId
+      const teacher = await Teacher.findById(teacherId);
+
+      if (!teacher) {
+        return res.status(404).json({ message: "Teacher not found" });
+      }
+
+      // Find the specific classroom within the teacher's class_room array
+      const classroom = teacher.class_room.id(classroomId);
+
+      if (!classroom) {
+        return res.status(404).json({ message: "Classroom not found" });
+      }
+
+      // Add the PDF URL to the pdf_url array
+      classroom.pdf_url.push(pdf_url);
+
+      // Save the updated teacher document
+      await teacher.save();
+
+      // Send response
+      res
+        .status(200)
+        .json({ message: "PDF URL added successfully", classroom });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Server error", error });
+    }
+  }
+);
 // get the rollno in the classroom
 router.get("/get-rollno/:teacherId/:classroomId", async (req, res) => {
   const { teacherId, classroomId } = req.params;
