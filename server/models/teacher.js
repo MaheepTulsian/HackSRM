@@ -3,6 +3,8 @@ import mongoose, { Schema } from "mongoose";
 const classRoomSchema = new Schema({
   class_name: { type: String },
   pdf_url: [{ type: String }],
+  assignements_url: [{ type: String }],
+  submission_url: [{ type: String }],
   student_rollnos: [{ type: String }],
 });
 
